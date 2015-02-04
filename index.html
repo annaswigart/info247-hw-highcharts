@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <title>San Francisco Rainfall</title>
+    <link rel="stylesheet" href="_css/main.css">
+    <script src="_js/jquery-1.11.0.min.js"></script>
+    <script src="_js/highcharts.js"></script>
+</head>
+<body>
+    <div id="container">
+    </div>
+
+<script>
+
+// function to return color for each season
+function colors(i) {
+  switch(i) {
+    case 0:
+      return "#1F77B4"; // winter
+      break;
+    case 1:
+      return "#DBDD8D"; // spring
+      break;
+    case 2:
+      return "#2CA02C"; // summer
+      break;
+    case 3:
+      return "#D62728"; // fall
+  };
+}   
+
+// set up the initial options
+var options = {
+  chart: {
+    renderTo: "container",
+    type: "bar",
+    style: {
+      fontFamily: "Helvetica,Arial,sans-serif"
+    }
+  },
+  legend: {
+    borderRadius: 0,
+    itemStyle: {
+      color: "#000000",
+      fontFamily: "Helvetica,Arial,sans-serif"
+    }
+  },
+
+  plotOptions: {
+    series: {
+      stacking: "normal" // vs. "percent"
+    }
+  },
+  series: [],
+  title: {
+    text: "San Francisco Rainfall 2000-2015",
+    style: {
+      color: "#000000",
+      fontFamily: "Helvetica,Arial,sans-serif",
+      fontSize: "20px",
+      fontWeight: "bold"
+    }
+  },
+  tooltip: {
+      // hints: borderRadius, borderWidth, shadow
+    style: {
+      // hints: color, fontFamily, fontSize, padding
+    }
+  },
+  xAxis: {
+    categories: [],
+    labels: {
+      style: {
+        color: "#333333",
+        fontFamily: "Helvetica,Arial,sans-serif"
+      }
+    },
+  },
+  yAxis: {
+    // hints: gridLineColor, gridLineDashStyle
+    labels: {
+      style: {
+        color: "#333333",
+        fontFamily: "Helvetica,Arial,sans-serif"
+      }
+    },
+    min: 0,
+    stackLabels: {
+      enabled: true,
+      style: {
+        fontFamily: "Helvetica,Arial,sans-serif",
+        fontWeight: "bold",
+        color: "#333333"
+      }
+    },
+    title: {
+      style: {
+        color: "#333333",
+        fontFamily: "Helvetica,Arial,sans-serif"
+      },
+      text: "Inches of Rain"
+    }
+  }
+}
+
+
+
+// ajax call to data from the csv file
+$.get("_data/SF_rainfall_seasons.csv", function (data) {
+
+  // split the csv by line ("\n")
+
+  // "seasons" is an empty array that will be populated by the season names
+  // "rainBySeason" is an array containing 4 empty arrays, each of will be populated by rainfall sum per season (e.g. [17.41, 13.07, 6.99, ...] for winter)
+  var seasons = [];
+  var rainBySeason = [[], [], [], []];
+
+  // loop through each line using $.each
+  $.each(lines, function(lineNo, line) {
+
+    // turn each line into an array that contains 6 items: 
+    // year, winter value, spring value, summer value, fall value, sum for the year
+    // use the .split() method
+    var items = line.split(",");
+
+    // use if an statement to differentiate between header & content
+    // if it's the header,
+    if (lineNo == 0) {
+      // set the seasons variable as the appropriate values from the header line
+
+    // otherwise,
+    } else {
+      // populate "options.xAxis.categories" array with the years ("2000", "2001", "2002", etc.)
+
+      // populate "rainBySeason" array; push the winter rain value to the rainBySeason[0], spring rain value to the rainBySeason[1], summer rain value to the rainBySeason[2], and the fall rain value to rainBySeason[3]
+
+    };    
+
+  });
+
+  // "options.series" is an array & each item in the array is an object with 3 keys: "name", "data", & "color"; in this example:
+    // "name" = season name
+    // "data" = rain value for a season
+    // "color" = bar color
+
+  // use a for loop to populate "options.series"
+
+  for(var i = 0; i < rainBySeason.length; i++) {
+    // create a placeholder object & pull the required value for each key from "seasons" variable, "rainBySeason" variable, & "colors()" function
+
+    // There is a strange quirk with Highcharts that plots the values for each bar in reversed order. To fix this, set the following keys and values in your loop:
+      // index: rainBySeason.length - 1 - i,
+      // legendIndex: i
+
+    };
+
+    // after the object is properly constructed, push it to "options.series" 
+  };
+
+
+  
+  // finally draw the chart by creating a new "Highcharts" object, which has settings that are defined in "options"
+  var chart = new Highcharts.Chart(options);
+
+});
+
+</script>
+
+</body>
+</html>
