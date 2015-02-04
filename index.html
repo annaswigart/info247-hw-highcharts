@@ -111,7 +111,7 @@ $.get("_data/SF_rainfall_seasons.csv", function (data) {
   // split the csv by line ("\n")
 
   // "seasons" is an empty array that will be populated by the season names
-  // "rainBySeason" is an array containing 4 empty arrays, each of will be populated by rainfall sum per season (e.g. [17.41, 13.07, 6.99, ...] for winter)
+  // "rainBySeason" is an array containing 4 empty arrays, each of will be populated by rainfall sums per season (e.g. [17.41, 13.07, 6.99, ...] for winter)
   var seasons = [];
   var rainBySeason = [[], [], [], []];
 
@@ -123,7 +123,7 @@ $.get("_data/SF_rainfall_seasons.csv", function (data) {
     // use the .split() method
     var items = line.split(",");
 
-    // use if an statement to differentiate between header & content
+    // use an if statement to differentiate between header & content
     // if it's the header,
     if (lineNo == 0) {
       // set the seasons variable as the appropriate values from the header line
@@ -138,10 +138,10 @@ $.get("_data/SF_rainfall_seasons.csv", function (data) {
 
   });
 
-  // "options.series" is an array & each item in the array is an object with 3 keys: "name", "data", & "color"; in this example:
+  // "options.series" is an array & each item in the array is an object with 3 main keys: "name", "data", & "color"; in this example:
     // "name" = season name
     // "data" = rain value for a season
-    // "color" = bar color
+    // "color" = bar segment color
 
   // use a for loop to populate "options.series"
 
